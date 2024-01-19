@@ -47,13 +47,9 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "manager",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "businessLogo",
       "fieldType": "byte[]",
-      "fieldTypeBlobContent": "any",
+      "fieldTypeBlobContent": "image",
       "fieldValidateRules": ["minbytes", "maxbytes"],
       "fieldValidateRulesMaxbytes": "1000",
       "fieldValidateRulesMinbytes": "3"
@@ -68,7 +64,15 @@
     }
   ],
   "name": "Enterprise",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "enterprise",
+      "relationshipName": "employee",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

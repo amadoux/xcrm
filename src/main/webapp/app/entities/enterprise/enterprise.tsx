@@ -118,10 +118,6 @@ export const Enterprise = () => {
                 <th className="hand" onClick={sort('city')}>
                   <Translate contentKey="xcrmApp.enterprise.city">City</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('city')} />
                 </th>
-                <th className="hand" onClick={sort('manager')}>
-                  <Translate contentKey="xcrmApp.enterprise.manager">Manager</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('manager')} />
-                </th>
                 <th className="hand" onClick={sort('businessLogo')}>
                   <Translate contentKey="xcrmApp.enterprise.businessLogo">Business Logo</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('businessLogo')} />
@@ -151,13 +147,15 @@ export const Enterprise = () => {
                     <Translate contentKey={`xcrmApp.Pays.${enterprise.country}`} />
                   </td>
                   <td>{enterprise.city}</td>
-                  <td>{enterprise.manager}</td>
                   <td>
                     {enterprise.businessLogo ? (
                       <div>
                         {enterprise.businessLogoContentType ? (
                           <a onClick={openFile(enterprise.businessLogoContentType, enterprise.businessLogo)}>
-                            <Translate contentKey="entity.action.open">Open</Translate>
+                            <img
+                              src={`data:${enterprise.businessLogoContentType};base64,${enterprise.businessLogo}`}
+                              style={{ maxHeight: '30px' }}
+                            />
                             &nbsp;
                           </a>
                         ) : null}

@@ -71,6 +71,7 @@ export const EmployeeUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
+    values.dateInspiration = convertDateTimeToServer(values.dateInspiration);
     values.birthDate = convertDateTimeToServer(values.birthDate);
     values.entryDate = convertDateTimeToServer(values.entryDate);
     values.releaseDate = convertDateTimeToServer(values.releaseDate);
@@ -103,6 +104,7 @@ export const EmployeeUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
+          dateInspiration: displayDefaultDateTime(),
           birthDate: displayDefaultDateTime(),
           entryDate: displayDefaultDateTime(),
           releaseDate: displayDefaultDateTime(),
@@ -115,6 +117,7 @@ export const EmployeeUpdate = () => {
           contractType: 'CDD',
           salaryType: 'EXECUTIVE_SALARIED',
           ...employeeEntity,
+          dateInspiration: convertDateTimeFromServer(employeeEntity.dateInspiration),
           birthDate: convertDateTimeFromServer(employeeEntity.birthDate),
           entryDate: convertDateTimeFromServer(employeeEntity.entryDate),
           releaseDate: convertDateTimeFromServer(employeeEntity.releaseDate),
@@ -198,7 +201,8 @@ export const EmployeeUpdate = () => {
                 id="employee-dateInspiration"
                 name="dateInspiration"
                 data-cy="dateInspiration"
-                type="text"
+                type="datetime-local"
+                placeholder="YYYY-MM-DD HH:mm"
               />
               <ValidatedField
                 label={translate('xcrmApp.employee.nationality')}
@@ -220,13 +224,6 @@ export const EmployeeUpdate = () => {
                 data-cy="uploadIdentityCard"
                 openActionLabel={translate('entity.action.open')}
                 validate={{}}
-              />
-              <ValidatedField
-                label={translate('xcrmApp.employee.companyName')}
-                id="employee-companyName"
-                name="companyName"
-                data-cy="companyName"
-                type="text"
               />
               <ValidatedField
                 label={translate('xcrmApp.employee.typeEmployed')}
@@ -326,13 +323,6 @@ export const EmployeeUpdate = () => {
                 id="employee-coefficient"
                 name="coefficient"
                 data-cy="coefficient"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('xcrmApp.employee.employedManager')}
-                id="employee-employedManager"
-                name="employedManager"
-                data-cy="employedManager"
                 type="text"
               />
               <ValidatedField

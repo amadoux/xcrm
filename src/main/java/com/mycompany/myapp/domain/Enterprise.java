@@ -62,9 +62,6 @@ public class Enterprise implements Serializable {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "manager")
-    private String manager;
-
     @Lob
     @Column(name = "business_logo")
     private byte[] businessLogo;
@@ -79,7 +76,7 @@ public class Enterprise implements Serializable {
     @Column(name = "map_locator_content_type")
     private String mapLocatorContentType;
 
-    @JsonIgnoreProperties(value = { "enterprise", "jobs", "manager", "department", "jobHistory" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "enterprise", "jobs", "manager", "department", "employes", "jobHistory" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "enterprise")
     private Employee employee;
 
@@ -202,19 +199,6 @@ public class Enterprise implements Serializable {
         this.city = city;
     }
 
-    public String getManager() {
-        return this.manager;
-    }
-
-    public Enterprise manager(String manager) {
-        this.setManager(manager);
-        return this;
-    }
-
-    public void setManager(String manager) {
-        this.manager = manager;
-    }
-
     public byte[] getBusinessLogo() {
         return this.businessLogo;
     }
@@ -318,7 +302,6 @@ public class Enterprise implements Serializable {
             ", businessPhone='" + getBusinessPhone() + "'" +
             ", country='" + getCountry() + "'" +
             ", city='" + getCity() + "'" +
-            ", manager='" + getManager() + "'" +
             ", businessLogo='" + getBusinessLogo() + "'" +
             ", businessLogoContentType='" + getBusinessLogoContentType() + "'" +
             ", mapLocator='" + getMapLocator() + "'" +

@@ -38,9 +38,6 @@
             <column name="city" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="manager" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="business_logo" type="${blobType}">
                 <constraints nullable="true" />
             </column>
@@ -82,7 +79,6 @@
             <column name="business_phone" type="string"/>
             <column name="country" type="string"/>
             <column name="city" type="string"/>
-            <column name="manager" type="string"/>
             <column name="business_logo" type="blob"/>
             <column name="business_logo_content_type" type="string"/>
             <column name="map_locator" type="blob"/>

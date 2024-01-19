@@ -18,8 +18,7 @@ public class EnterpriseTestSamples {
             .businessDomicile("businessDomicile1")
             .businessEmail("businessEmail1")
             .businessPhone("businessPhone1")
-            .city("city1")
-            .manager("manager1");
+            .city("city1");
     }
 
     public static Enterprise getEnterpriseSample2() {
@@ -31,8 +30,7 @@ public class EnterpriseTestSamples {
             .businessDomicile("businessDomicile2")
             .businessEmail("businessEmail2")
             .businessPhone("businessPhone2")
-            .city("city2")
-            .manager("manager2");
+            .city("city2");
     }
 
     public static Enterprise getEnterpriseRandomSampleGenerator() {
@@ -44,7 +42,6 @@ public class EnterpriseTestSamples {
             .businessDomicile(UUID.randomUUID().toString())
             .businessEmail(UUID.randomUUID().toString())
             .businessPhone(UUID.randomUUID().toString())
-            .city(UUID.randomUUID().toString())
-            .manager(UUID.randomUUID().toString());
+            .city(UUID.randomUUID().toString());
     }
 }

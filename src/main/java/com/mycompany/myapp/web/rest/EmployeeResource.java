@@ -159,9 +159,6 @@ public class EmployeeResource {
                 if (employee.getUploadIdentityCardContentType() != null) {
                     existingEmployee.setUploadIdentityCardContentType(employee.getUploadIdentityCardContentType());
                 }
-                if (employee.getCompanyName() != null) {
-                    existingEmployee.setCompanyName(employee.getCompanyName());
-                }
                 if (employee.getTypeEmployed() != null) {
                     existingEmployee.setTypeEmployed(employee.getTypeEmployed());
                 }
@@ -200,9 +197,6 @@ public class EmployeeResource {
                 }
                 if (employee.getCoefficient() != null) {
                     existingEmployee.setCoefficient(employee.getCoefficient());
-                }
-                if (employee.getEmployedManager() != null) {
-                    existingEmployee.setEmployedManager(employee.getEmployedManager());
                 }
                 if (employee.getNumberHours() != null) {
                     existingEmployee.setNumberHours(employee.getNumberHours());

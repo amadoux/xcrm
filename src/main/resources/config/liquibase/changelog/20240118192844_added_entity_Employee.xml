@@ -29,7 +29,7 @@
             <column name="identity_card" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="date_inspiration" type="varchar(255)">
+            <column name="date_inspiration" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="nationality" type="varchar(255)">
@@ -39,9 +39,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="upload_identity_card_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="company_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="type_employed" type="varchar(255)">
@@ -83,9 +80,6 @@
             <column name="coefficient" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="employed_manager" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="number_hours" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -118,6 +112,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="employee" columnName="date_inspiration" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="employee" columnName="birth_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="employee" columnName="entry_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="employee" columnName="release_date" columnDataType="${datetimeType}"/>
@@ -146,11 +141,10 @@
             <column name="email" type="string"/>
             <column name="phone_number" type="string"/>
             <column name="identity_card" type="string"/>
-            <column name="date_inspiration" type="string"/>
+            <column name="date_inspiration" type="date"/>
             <column name="nationality" type="string"/>
             <column name="upload_identity_card" type="blob"/>
             <column name="upload_identity_card_content_type" type="string"/>
-            <column name="company_name" type="string"/>
             <column name="type_employed" type="string"/>
             <column name="city_agency" type="string"/>
             <column name="residence_city" type="string"/>
@@ -164,7 +158,6 @@
             <column name="description_workstation" type="string"/>
             <column name="level" type="string"/>
             <column name="coefficient" type="numeric"/>
-            <column name="employed_manager" type="string"/>
             <column name="number_hours" type="string"/>
             <column name="average_hourly_cost" type="string"/>
             <column name="monthly_gross_amount" type="numeric"/>

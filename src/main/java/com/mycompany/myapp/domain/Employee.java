@@ -53,7 +53,7 @@ public class Employee implements Serializable {
     private String identityCard;
 
     @Column(name = "date_inspiration")
-    private String dateInspiration;
+    private Instant dateInspiration;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "nationality")
@@ -65,9 +65,6 @@ public class Employee implements Serializable {
 
     @Column(name = "upload_identity_card_content_type")
     private String uploadIdentityCardContentType;
-
-    @Column(name = "company_name")
-    private String companyName;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_employed")
@@ -110,9 +107,6 @@ public class Employee implements Serializable {
     @Column(name = "coefficient")
     private Long coefficient;
 
-    @Column(name = "employed_manager")
-    private String employedManager;
-
     @Column(name = "number_hours")
     private String numberHours;
 
@@ -147,7 +141,7 @@ public class Employee implements Serializable {
     private Set<Job> jobs = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "enterprise", "jobs", "manager", "department", "jobHistory" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "enterprise", "jobs", "manager", "department", "employes", "jobHistory" }, allowSetters = true)
     private Employee manager;
 
     /**
@@ -156,6 +150,11 @@ public class Employee implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "location", "employees", "jobHistory" }, allowSetters = true)
     private Department department;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "enterprise", "jobs", "manager", "department", "employes", "jobHistory" }, allowSetters = true)
+    private Set<Employee> employes = new HashSet<>();
 
     @JsonIgnoreProperties(value = { "job", "department", "employee" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "employee")
@@ -241,16 +240,16 @@ public class Employee implements Serializable {
         this.identityCard = identityCard;
     }
 
-    public String getDateInspiration() {
+    public Instant getDateInspiration() {
         return this.dateInspiration;
     }
 
-    public Employee dateInspiration(String dateInspiration) {
+    public Employee dateInspiration(Instant dateInspiration) {
         this.setDateInspiration(dateInspiration);
         return this;
     }
 
-    public void setDateInspiration(String dateInspiration) {
+    public void setDateInspiration(Instant dateInspiration) {
         this.dateInspiration = dateInspiration;
     }
 
@@ -291,19 +290,6 @@ public class Employee implements Serializable {
 
     public void setUploadIdentityCardContentType(String uploadIdentityCardContentType) {
         this.uploadIdentityCardContentType = uploadIdentityCardContentType;
-    }
-
-    public String getCompanyName() {
-        return this.companyName;
-    }
-
-    public Employee companyName(String companyName) {
-        this.setCompanyName(companyName);
-        return this;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public TypeEmployed getTypeEmployed() {
@@ -475,19 +461,6 @@ public class Employee implements Serializable {
         this.coefficient = coefficient;
     }
 
-    public String getEmployedManager() {
-        return this.employedManager;
-    }
-
-    public Employee employedManager(String employedManager) {
-        this.setEmployedManager(employedManager);
-        return this;
-    }
-
-    public void setEmployedManager(String employedManager) {
-        this.employedManager = employedManager;
-    }
-
     public String getNumberHours() {
         return this.numberHours;
     }
@@ -649,6 +622,37 @@ public class Employee implements Serializable {
         return this;
     }
 
+    public Set<Employee> getEmployes() {
+        return this.employes;
+    }
+
+    public void setEmployes(Set<Employee> employees) {
+        if (this.employes != null) {
+            this.employes.forEach(i -> i.setManager(null));
+        }
+        if (employees != null) {
+            employees.forEach(i -> i.setManager(this));
+        }
+        this.employes = employees;
+    }
+
+    public Employee employes(Set<Employee> employees) {
+        this.setEmployes(employees);
+        return this;
+    }
+
+    public Employee addEmploye(Employee employee) {
+        this.employes.add(employee);
+        employee.setManager(this);
+        return this;
+    }
+
+    public Employee removeEmploye(Employee employee) {
+        this.employes.remove(employee);
+        employee.setManager(null);
+        return this;
+    }
+
     public JobHistory getJobHistory() {
         return this.jobHistory;
     }
@@ -701,7 +705,6 @@ public class Employee implements Serializable {
             ", nationality='" + getNationality() + "'" +
             ", uploadIdentityCard='" + getUploadIdentityCard() + "'" +
             ", uploadIdentityCardContentType='" + getUploadIdentityCardContentType() + "'" +
-            ", companyName='" + getCompanyName() + "'" +
             ", typeEmployed='" + getTypeEmployed() + "'" +
             ", cityAgency='" + getCityAgency() + "'" +
             ", residenceCity='" + getResidenceCity() + "'" +
@@ -715,7 +718,6 @@ public class Employee implements Serializable {
             ", descriptionWorkstation='" + getDescriptionWorkstation() + "'" +
             ", level='" + getLevel() + "'" +
             ", coefficient=" + getCoefficient() +
-            ", employedManager='" + getEmployedManager() + "'" +
             ", numberHours='" + getNumberHours() + "'" +
             ", averageHourlyCost='" + getAverageHourlyCost() + "'" +
             ", monthlyGrossAmount=" + getMonthlyGrossAmount() +

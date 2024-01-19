@@ -163,10 +163,6 @@ export const Employee = () => {
                     <Translate contentKey="xcrmApp.employee.uploadIdentityCard">Upload Identity Card</Translate>{' '}
                     <FontAwesomeIcon icon={getSortIconByFieldName('uploadIdentityCard')} />
                   </th>
-                  <th className="hand" onClick={sort('companyName')}>
-                    <Translate contentKey="xcrmApp.employee.companyName">Company Name</Translate>{' '}
-                    <FontAwesomeIcon icon={getSortIconByFieldName('companyName')} />
-                  </th>
                   <th className="hand" onClick={sort('typeEmployed')}>
                     <Translate contentKey="xcrmApp.employee.typeEmployed">Type Employed</Translate>{' '}
                     <FontAwesomeIcon icon={getSortIconByFieldName('typeEmployed')} />
@@ -218,10 +214,6 @@ export const Employee = () => {
                   <th className="hand" onClick={sort('coefficient')}>
                     <Translate contentKey="xcrmApp.employee.coefficient">Coefficient</Translate>{' '}
                     <FontAwesomeIcon icon={getSortIconByFieldName('coefficient')} />
-                  </th>
-                  <th className="hand" onClick={sort('employedManager')}>
-                    <Translate contentKey="xcrmApp.employee.employedManager">Employed Manager</Translate>{' '}
-                    <FontAwesomeIcon icon={getSortIconByFieldName('employedManager')} />
                   </th>
                   <th className="hand" onClick={sort('numberHours')}>
                     <Translate contentKey="xcrmApp.employee.numberHours">Number Hours</Translate>{' '}
@@ -276,7 +268,11 @@ export const Employee = () => {
                     <td>{employee.email}</td>
                     <td>{employee.phoneNumber}</td>
                     <td>{employee.identityCard}</td>
-                    <td>{employee.dateInspiration}</td>
+                    <td>
+                      {employee.dateInspiration ? (
+                        <TextFormat type="date" value={employee.dateInspiration} format={APP_DATE_FORMAT} />
+                      ) : null}
+                    </td>
                     <td>
                       <Translate contentKey={`xcrmApp.Pays.${employee.nationality}`} />
                     </td>
@@ -295,7 +291,6 @@ export const Employee = () => {
                         </div>
                       ) : null}
                     </td>
-                    <td>{employee.companyName}</td>
                     <td>
                       <Translate contentKey={`xcrmApp.TypeEmployed.${employee.typeEmployed}`} />
                     </td>
@@ -315,7 +310,6 @@ export const Employee = () => {
                       <Translate contentKey={`xcrmApp.Level.${employee.level}`} />
                     </td>
                     <td>{employee.coefficient}</td>
-                    <td>{employee.employedManager}</td>
                     <td>{employee.numberHours}</td>
                     <td>{employee.averageHourlyCost}</td>
                     <td>{employee.monthlyGrossAmount}</td>

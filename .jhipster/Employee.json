@@ -31,7 +31,7 @@
     },
     {
       "fieldName": "dateInspiration",
-      "fieldType": "String"
+      "fieldType": "Instant"
     },
     {
       "fieldName": "nationality",
@@ -45,10 +45,6 @@
       "fieldValidateRules": ["minbytes", "maxbytes"],
       "fieldValidateRulesMaxbytes": "1000",
       "fieldValidateRulesMinbytes": "3"
-    },
-    {
-      "fieldName": "companyName",
-      "fieldType": "String"
     },
     {
       "fieldName": "typeEmployed",
@@ -105,10 +101,6 @@
       "fieldType": "Long"
     },
     {
-      "fieldName": "employedManager",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "numberHours",
       "fieldType": "String"
     },
@@ -145,6 +137,7 @@
     {
       "otherEntityField": "compagnyName",
       "otherEntityName": "enterprise",
+      "otherEntityRelationshipName": "employee",
       "relationshipName": "enterprise",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
@@ -159,6 +152,7 @@
     {
       "otherEntityField": "email",
       "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employe",
       "relationshipName": "manager",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
@@ -169,6 +163,13 @@
       "relationshipName": "department",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "manager",
+      "relationshipName": "employe",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no"

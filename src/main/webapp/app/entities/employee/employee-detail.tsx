@@ -67,7 +67,11 @@ export const EmployeeDetail = () => {
               <Translate contentKey="xcrmApp.employee.dateInspiration">Date Inspiration</Translate>
             </span>
           </dt>
-          <dd>{employeeEntity.dateInspiration}</dd>
+          <dd>
+            {employeeEntity.dateInspiration ? (
+              <TextFormat value={employeeEntity.dateInspiration} type="date" format={APP_DATE_FORMAT} />
+            ) : null}
+          </dd>
           <dt>
             <span id="nationality">
               <Translate contentKey="xcrmApp.employee.nationality">Nationality</Translate>
@@ -93,12 +97,6 @@ export const EmployeeDetail = () => {
               </div>
             ) : null}
           </dd>
-          <dt>
-            <span id="companyName">
-              <Translate contentKey="xcrmApp.employee.companyName">Company Name</Translate>
-            </span>
-          </dt>
-          <dd>{employeeEntity.companyName}</dd>
           <dt>
             <span id="typeEmployed">
               <Translate contentKey="xcrmApp.employee.typeEmployed">Type Employed</Translate>
@@ -179,12 +177,6 @@ export const EmployeeDetail = () => {
             </span>
           </dt>
           <dd>{employeeEntity.coefficient}</dd>
-          <dt>
-            <span id="employedManager">
-              <Translate contentKey="xcrmApp.employee.employedManager">Employed Manager</Translate>
-            </span>
-          </dt>
-          <dd>{employeeEntity.employedManager}</dd>
           <dt>
             <span id="numberHours">
               <Translate contentKey="xcrmApp.employee.numberHours">Number Hours</Translate>

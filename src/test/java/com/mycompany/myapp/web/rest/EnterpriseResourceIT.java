@@ -55,9 +55,6 @@ class EnterpriseResourceIT {
     private static final String DEFAULT_CITY = "AAAAAAAAAA";
     private static final String UPDATED_CITY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_MANAGER = "AAAAAAAAAA";
-    private static final String UPDATED_MANAGER = "BBBBBBBBBB";
-
     private static final byte[] DEFAULT_BUSINESS_LOGO = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_BUSINESS_LOGO = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_BUSINESS_LOGO_CONTENT_TYPE = "image/jpg";
@@ -101,7 +98,6 @@ class EnterpriseResourceIT {
             .businessPhone(DEFAULT_BUSINESS_PHONE)
             .country(DEFAULT_COUNTRY)
             .city(DEFAULT_CITY)
-            .manager(DEFAULT_MANAGER)
             .businessLogo(DEFAULT_BUSINESS_LOGO)
             .businessLogoContentType(DEFAULT_BUSINESS_LOGO_CONTENT_TYPE)
             .mapLocator(DEFAULT_MAP_LOCATOR)
@@ -125,7 +121,6 @@ class EnterpriseResourceIT {
             .businessPhone(UPDATED_BUSINESS_PHONE)
             .country(UPDATED_COUNTRY)
             .city(UPDATED_CITY)
-            .manager(UPDATED_MANAGER)
             .businessLogo(UPDATED_BUSINESS_LOGO)
             .businessLogoContentType(UPDATED_BUSINESS_LOGO_CONTENT_TYPE)
             .mapLocator(UPDATED_MAP_LOCATOR)
@@ -159,7 +154,6 @@ class EnterpriseResourceIT {
         assertThat(testEnterprise.getBusinessPhone()).isEqualTo(DEFAULT_BUSINESS_PHONE);
         assertThat(testEnterprise.getCountry()).isEqualTo(DEFAULT_COUNTRY);
         assertThat(testEnterprise.getCity()).isEqualTo(DEFAULT_CITY);
-        assertThat(testEnterprise.getManager()).isEqualTo(DEFAULT_MANAGER);
         assertThat(testEnterprise.getBusinessLogo()).isEqualTo(DEFAULT_BUSINESS_LOGO);
         assertThat(testEnterprise.getBusinessLogoContentType()).isEqualTo(DEFAULT_BUSINESS_LOGO_CONTENT_TYPE);
         assertThat(testEnterprise.getMapLocator()).isEqualTo(DEFAULT_MAP_LOCATOR);
@@ -289,7 +283,6 @@ class EnterpriseResourceIT {
             .andExpect(jsonPath("$.[*].businessPhone").value(hasItem(DEFAULT_BUSINESS_PHONE)))
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY.toString())))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
-            .andExpect(jsonPath("$.[*].manager").value(hasItem(DEFAULT_MANAGER)))
             .andExpect(jsonPath("$.[*].businessLogoContentType").value(hasItem(DEFAULT_BUSINESS_LOGO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].businessLogo").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_BUSINESS_LOGO))))
             .andExpect(jsonPath("$.[*].mapLocatorContentType").value(hasItem(DEFAULT_MAP_LOCATOR_CONTENT_TYPE)))
@@ -316,7 +309,6 @@ class EnterpriseResourceIT {
             .andExpect(jsonPath("$.businessPhone").value(DEFAULT_BUSINESS_PHONE))
             .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY))
-            .andExpect(jsonPath("$.manager").value(DEFAULT_MANAGER))
             .andExpect(jsonPath("$.businessLogoContentType").value(DEFAULT_BUSINESS_LOGO_CONTENT_TYPE))
             .andExpect(jsonPath("$.businessLogo").value(Base64.getEncoder().encodeToString(DEFAULT_BUSINESS_LOGO)))
             .andExpect(jsonPath("$.mapLocatorContentType").value(DEFAULT_MAP_LOCATOR_CONTENT_TYPE))
@@ -351,7 +343,6 @@ class EnterpriseResourceIT {
             .businessPhone(UPDATED_BUSINESS_PHONE)
             .country(UPDATED_COUNTRY)
             .city(UPDATED_CITY)
-            .manager(UPDATED_MANAGER)
             .businessLogo(UPDATED_BUSINESS_LOGO)
             .businessLogoContentType(UPDATED_BUSINESS_LOGO_CONTENT_TYPE)
             .mapLocator(UPDATED_MAP_LOCATOR)
@@ -377,7 +368,6 @@ class EnterpriseResourceIT {
         assertThat(testEnterprise.getBusinessPhone()).isEqualTo(UPDATED_BUSINESS_PHONE);
         assertThat(testEnterprise.getCountry()).isEqualTo(UPDATED_COUNTRY);
         assertThat(testEnterprise.getCity()).isEqualTo(UPDATED_CITY);
-        assertThat(testEnterprise.getManager()).isEqualTo(UPDATED_MANAGER);
         assertThat(testEnterprise.getBusinessLogo()).isEqualTo(UPDATED_BUSINESS_LOGO);
         assertThat(testEnterprise.getBusinessLogoContentType()).isEqualTo(UPDATED_BUSINESS_LOGO_CONTENT_TYPE);
         assertThat(testEnterprise.getMapLocator()).isEqualTo(UPDATED_MAP_LOCATOR);
@@ -458,8 +448,6 @@ class EnterpriseResourceIT {
             .businessPhone(UPDATED_BUSINESS_PHONE)
             .country(UPDATED_COUNTRY)
             .city(UPDATED_CITY)
-            .businessLogo(UPDATED_BUSINESS_LOGO)
-            .businessLogoContentType(UPDATED_BUSINESS_LOGO_CONTENT_TYPE)
             .mapLocator(UPDATED_MAP_LOCATOR)
             .mapLocatorContentType(UPDATED_MAP_LOCATOR_CONTENT_TYPE);
 
@@ -483,9 +471,8 @@ class EnterpriseResourceIT {
         assertThat(testEnterprise.getBusinessPhone()).isEqualTo(UPDATED_BUSINESS_PHONE);
         assertThat(testEnterprise.getCountry()).isEqualTo(UPDATED_COUNTRY);
         assertThat(testEnterprise.getCity()).isEqualTo(UPDATED_CITY);
-        assertThat(testEnterprise.getManager()).isEqualTo(DEFAULT_MANAGER);
-        assertThat(testEnterprise.getBusinessLogo()).isEqualTo(UPDATED_BUSINESS_LOGO);
-        assertThat(testEnterprise.getBusinessLogoContentType()).isEqualTo(UPDATED_BUSINESS_LOGO_CONTENT_TYPE);
+        assertThat(testEnterprise.getBusinessLogo()).isEqualTo(DEFAULT_BUSINESS_LOGO);
+        assertThat(testEnterprise.getBusinessLogoContentType()).isEqualTo(DEFAULT_BUSINESS_LOGO_CONTENT_TYPE);
         assertThat(testEnterprise.getMapLocator()).isEqualTo(UPDATED_MAP_LOCATOR);
         assertThat(testEnterprise.getMapLocatorContentType()).isEqualTo(UPDATED_MAP_LOCATOR_CONTENT_TYPE);
     }
@@ -511,7 +498,6 @@ class EnterpriseResourceIT {
             .businessPhone(UPDATED_BUSINESS_PHONE)
             .country(UPDATED_COUNTRY)
             .city(UPDATED_CITY)
-            .manager(UPDATED_MANAGER)
             .businessLogo(UPDATED_BUSINESS_LOGO)
             .businessLogoContentType(UPDATED_BUSINESS_LOGO_CONTENT_TYPE)
             .mapLocator(UPDATED_MAP_LOCATOR)
@@ -537,7 +523,6 @@ class EnterpriseResourceIT {
         assertThat(testEnterprise.getBusinessPhone()).isEqualTo(UPDATED_BUSINESS_PHONE);
         assertThat(testEnterprise.getCountry()).isEqualTo(UPDATED_COUNTRY);
         assertThat(testEnterprise.getCity()).isEqualTo(UPDATED_CITY);
-        assertThat(testEnterprise.getManager()).isEqualTo(UPDATED_MANAGER);
         assertThat(testEnterprise.getBusinessLogo()).isEqualTo(UPDATED_BUSINESS_LOGO);
         assertThat(testEnterprise.getBusinessLogoContentType()).isEqualTo(UPDATED_BUSINESS_LOGO_CONTENT_TYPE);
         assertThat(testEnterprise.getMapLocator()).isEqualTo(UPDATED_MAP_LOCATOR);

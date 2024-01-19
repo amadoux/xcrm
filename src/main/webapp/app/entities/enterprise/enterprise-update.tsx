@@ -178,19 +178,13 @@ export const EnterpriseUpdate = () => {
                 ))}
               </ValidatedField>
               <ValidatedField label={translate('xcrmApp.enterprise.city')} id="enterprise-city" name="city" data-cy="city" type="text" />
-              <ValidatedField
-                label={translate('xcrmApp.enterprise.manager')}
-                id="enterprise-manager"
-                name="manager"
-                data-cy="manager"
-                type="text"
-              />
               <ValidatedBlobField
                 label={translate('xcrmApp.enterprise.businessLogo')}
                 id="enterprise-businessLogo"
                 name="businessLogo"
                 data-cy="businessLogo"
-                openActionLabel={translate('entity.action.open')}
+                isImage
+                accept="image/*"
                 validate={{}}
               />
               <ValidatedBlobField

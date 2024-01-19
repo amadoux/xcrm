@@ -83,12 +83,6 @@ export const EnterpriseDetail = () => {
           </dt>
           <dd>{enterpriseEntity.city}</dd>
           <dt>
-            <span id="manager">
-              <Translate contentKey="xcrmApp.enterprise.manager">Manager</Translate>
-            </span>
-          </dt>
-          <dd>{enterpriseEntity.manager}</dd>
-          <dt>
             <span id="businessLogo">
               <Translate contentKey="xcrmApp.enterprise.businessLogo">Business Logo</Translate>
             </span>
@@ -98,7 +92,10 @@ export const EnterpriseDetail = () => {
               <div>
                 {enterpriseEntity.businessLogoContentType ? (
                   <a onClick={openFile(enterpriseEntity.businessLogoContentType, enterpriseEntity.businessLogo)}>
-                    <Translate contentKey="entity.action.open">Open</Translate>&nbsp;
+                    <img
+                      src={`data:${enterpriseEntity.businessLogoContentType};base64,${enterpriseEntity.businessLogo}`}
+                      style={{ maxHeight: '30px' }}
+                    />
                   </a>
                 ) : null}
                 <span>

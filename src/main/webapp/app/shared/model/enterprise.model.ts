@@ -11,7 +11,6 @@ export interface IEnterprise {
   businessPhone?: string;
   country?: keyof typeof Pays | null;
   city?: string | null;
-  manager?: string | null;
   businessLogoContentType?: string | null;
   businessLogo?: string | null;
   mapLocatorContentType?: string | null;

@@ -88,6 +88,28 @@ class EmployeeTest {
     }
 
     @Test
+    void employeTest() throws Exception {
+        Employee employee = getEmployeeRandomSampleGenerator();
+        Employee employeeBack = getEmployeeRandomSampleGenerator();
+
+        employee.addEmploye(employeeBack);
+        assertThat(employee.getEmployes()).containsOnly(employeeBack);
+        assertThat(employeeBack.getManager()).isEqualTo(employee);
+
+        employee.removeEmploye(employeeBack);
+        assertThat(employee.getEmployes()).doesNotContain(employeeBack);
+        assertThat(employeeBack.getManager()).isNull();
+
+        employee.employes(new HashSet<>(Set.of(employeeBack)));
+        assertThat(employee.getEmployes()).containsOnly(employeeBack);
+        assertThat(employeeBack.getManager()).isEqualTo(employee);
+
+        employee.setEmployes(new HashSet<>());
+        assertThat(employee.getEmployes()).doesNotContain(employeeBack);
+        assertThat(employeeBack.getManager()).isNull();
+    }
+
+    @Test
     void jobHistoryTest() throws Exception {
         Employee employee = getEmployeeRandomSampleGenerator();
         JobHistory jobHistoryBack = getJobHistoryRandomSampleGenerator();

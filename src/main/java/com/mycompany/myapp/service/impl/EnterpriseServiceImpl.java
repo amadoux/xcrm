@@ -69,9 +69,6 @@ public class EnterpriseServiceImpl implements EnterpriseService {
                 if (enterprise.getCity() != null) {
                     existingEnterprise.setCity(enterprise.getCity());
                 }
-                if (enterprise.getManager() != null) {
-                    existingEnterprise.setManager(enterprise.getManager());
-                }
                 if (enterprise.getBusinessLogo() != null) {
                     existingEnterprise.setBusinessLogo(enterprise.getBusinessLogo());
                 }

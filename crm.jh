@@ -41,8 +41,7 @@ entity Enterprise {
     businessPhone String required
     country Pays
     city String
-    manager String
-    businessLogo Blob minbytes(3) maxbytes(1000)
+    businessLogo ImageBlob minbytes(3) maxbytes(1000)
     mapLocator ImageBlob minbytes(3) maxbytes(1000)
 }
 /**
@@ -57,10 +56,9 @@ entity Employee {
 	email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
 	phoneNumber String
     identityCard String required
-    dateInspiration String
+    dateInspiration Instant
     nationality Pays
     uploadIdentityCard Blob minbytes(3) maxbytes(1000)
-    companyName String
     typeEmployed TypeEmployed
      cityAgency String
      firstName String
@@ -78,7 +76,6 @@ entity Employee {
      descriptionWorkstation String
      level Level
      coefficient Long
-     employedManager String
      numberHours String
      averageHourlyCost String
      monthlyGrossAmount Long
@@ -134,7 +131,7 @@ relationship OneToOne {
 	Department{location} to Location
 }
 relationship OneToOne {
-	Employee{enterprise(compagnyName)} to Enterprise
+	Employee{enterprise(compagnyName)} to Enterprise{employee}
 }
 relationship ManyToMany {
 	Job{task(title)} to Task{job}
@@ -154,7 +151,7 @@ relationship OneToMany {
 }
 
 relationship ManyToOne {
-	Employee{manager(email)} to Employee
+	Employee{manager(email)} to Employee{employe}
 }
 
 // defining multiple oneToOne relationships

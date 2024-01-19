@@ -26,7 +26,6 @@
       "dateInspiration": "Date Inspiration",
       "nationality": "Nationality",
       "uploadIdentityCard": "Upload Identity Card",
-      "companyName": "Company Name",
       "typeEmployed": "Type Employed",
       "cityAgency": "City Agency",
       "residenceCity": "Residence City",
@@ -40,7 +39,6 @@
       "descriptionWorkstation": "Description Workstation",
       "level": "Level",
       "coefficient": "Coefficient",
-      "employedManager": "Employed Manager",
       "numberHours": "Number Hours",
       "averageHourlyCost": "Average Hourly Cost",
       "monthlyGrossAmount": "Monthly Gross Amount",
@@ -52,6 +50,7 @@
       "job": "Job",
       "manager": "Manager",
       "department": "Department",
+      "employe": "Employe",
       "jobHistory": "Job History"
     }
   }

@@ -60,8 +60,8 @@ class EmployeeResourceIT {
     private static final String DEFAULT_IDENTITY_CARD = "AAAAAAAAAA";
     private static final String UPDATED_IDENTITY_CARD = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DATE_INSPIRATION = "AAAAAAAAAA";
-    private static final String UPDATED_DATE_INSPIRATION = "BBBBBBBBBB";
+    private static final Instant DEFAULT_DATE_INSPIRATION = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_INSPIRATION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Pays DEFAULT_NATIONALITY = Pays.CAMEROON;
     private static final Pays UPDATED_NATIONALITY = Pays.SENEGAL;
@@ -70,9 +70,6 @@ class EmployeeResourceIT {
     private static final byte[] UPDATED_UPLOAD_IDENTITY_CARD = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_UPLOAD_IDENTITY_CARD_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE = "image/png";
-
-    private static final String DEFAULT_COMPANY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_COMPANY_NAME = "BBBBBBBBBB";
 
     private static final TypeEmployed DEFAULT_TYPE_EMPLOYED = TypeEmployed.MARKETER;
     private static final TypeEmployed UPDATED_TYPE_EMPLOYED = TypeEmployed.SALARY;
@@ -112,9 +109,6 @@ class EmployeeResourceIT {
 
     private static final Long DEFAULT_COEFFICIENT = 1L;
     private static final Long UPDATED_COEFFICIENT = 2L;
-
-    private static final String DEFAULT_EMPLOYED_MANAGER = "AAAAAAAAAA";
-    private static final String UPDATED_EMPLOYED_MANAGER = "BBBBBBBBBB";
 
     private static final String DEFAULT_NUMBER_HOURS = "AAAAAAAAAA";
     private static final String UPDATED_NUMBER_HOURS = "BBBBBBBBBB";
@@ -174,7 +168,6 @@ class EmployeeResourceIT {
             .nationality(DEFAULT_NATIONALITY)
             .uploadIdentityCard(DEFAULT_UPLOAD_IDENTITY_CARD)
             .uploadIdentityCardContentType(DEFAULT_UPLOAD_IDENTITY_CARD_CONTENT_TYPE)
-            .companyName(DEFAULT_COMPANY_NAME)
             .typeEmployed(DEFAULT_TYPE_EMPLOYED)
             .cityAgency(DEFAULT_CITY_AGENCY)
             .residenceCity(DEFAULT_RESIDENCE_CITY)
@@ -188,7 +181,6 @@ class EmployeeResourceIT {
             .descriptionWorkstation(DEFAULT_DESCRIPTION_WORKSTATION)
             .level(DEFAULT_LEVEL)
             .coefficient(DEFAULT_COEFFICIENT)
-            .employedManager(DEFAULT_EMPLOYED_MANAGER)
             .numberHours(DEFAULT_NUMBER_HOURS)
             .averageHourlyCost(DEFAULT_AVERAGE_HOURLY_COST)
             .monthlyGrossAmount(DEFAULT_MONTHLY_GROSS_AMOUNT)
@@ -216,7 +208,6 @@ class EmployeeResourceIT {
             .nationality(UPDATED_NATIONALITY)
             .uploadIdentityCard(UPDATED_UPLOAD_IDENTITY_CARD)
             .uploadIdentityCardContentType(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE)
-            .companyName(UPDATED_COMPANY_NAME)
             .typeEmployed(UPDATED_TYPE_EMPLOYED)
             .cityAgency(UPDATED_CITY_AGENCY)
             .residenceCity(UPDATED_RESIDENCE_CITY)
@@ -230,7 +221,6 @@ class EmployeeResourceIT {
             .descriptionWorkstation(UPDATED_DESCRIPTION_WORKSTATION)
             .level(UPDATED_LEVEL)
             .coefficient(UPDATED_COEFFICIENT)
-            .employedManager(UPDATED_EMPLOYED_MANAGER)
             .numberHours(UPDATED_NUMBER_HOURS)
             .averageHourlyCost(UPDATED_AVERAGE_HOURLY_COST)
             .monthlyGrossAmount(UPDATED_MONTHLY_GROSS_AMOUNT)
@@ -268,7 +258,6 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getNationality()).isEqualTo(DEFAULT_NATIONALITY);
         assertThat(testEmployee.getUploadIdentityCard()).isEqualTo(DEFAULT_UPLOAD_IDENTITY_CARD);
         assertThat(testEmployee.getUploadIdentityCardContentType()).isEqualTo(DEFAULT_UPLOAD_IDENTITY_CARD_CONTENT_TYPE);
-        assertThat(testEmployee.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testEmployee.getTypeEmployed()).isEqualTo(DEFAULT_TYPE_EMPLOYED);
         assertThat(testEmployee.getCityAgency()).isEqualTo(DEFAULT_CITY_AGENCY);
         assertThat(testEmployee.getResidenceCity()).isEqualTo(DEFAULT_RESIDENCE_CITY);
@@ -282,7 +271,6 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getDescriptionWorkstation()).isEqualTo(DEFAULT_DESCRIPTION_WORKSTATION);
         assertThat(testEmployee.getLevel()).isEqualTo(DEFAULT_LEVEL);
         assertThat(testEmployee.getCoefficient()).isEqualTo(DEFAULT_COEFFICIENT);
-        assertThat(testEmployee.getEmployedManager()).isEqualTo(DEFAULT_EMPLOYED_MANAGER);
         assertThat(testEmployee.getNumberHours()).isEqualTo(DEFAULT_NUMBER_HOURS);
         assertThat(testEmployee.getAverageHourlyCost()).isEqualTo(DEFAULT_AVERAGE_HOURLY_COST);
         assertThat(testEmployee.getMonthlyGrossAmount()).isEqualTo(DEFAULT_MONTHLY_GROSS_AMOUNT);
@@ -378,13 +366,12 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
             .andExpect(jsonPath("$.[*].identityCard").value(hasItem(DEFAULT_IDENTITY_CARD)))
-            .andExpect(jsonPath("$.[*].dateInspiration").value(hasItem(DEFAULT_DATE_INSPIRATION)))
+            .andExpect(jsonPath("$.[*].dateInspiration").value(hasItem(DEFAULT_DATE_INSPIRATION.toString())))
             .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY.toString())))
             .andExpect(jsonPath("$.[*].uploadIdentityCardContentType").value(hasItem(DEFAULT_UPLOAD_IDENTITY_CARD_CONTENT_TYPE)))
             .andExpect(
                 jsonPath("$.[*].uploadIdentityCard").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_UPLOAD_IDENTITY_CARD)))
             )
-            .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME)))
             .andExpect(jsonPath("$.[*].typeEmployed").value(hasItem(DEFAULT_TYPE_EMPLOYED.toString())))
             .andExpect(jsonPath("$.[*].cityAgency").value(hasItem(DEFAULT_CITY_AGENCY)))
             .andExpect(jsonPath("$.[*].residenceCity").value(hasItem(DEFAULT_RESIDENCE_CITY)))
@@ -398,7 +385,6 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.[*].descriptionWorkstation").value(hasItem(DEFAULT_DESCRIPTION_WORKSTATION)))
             .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())))
             .andExpect(jsonPath("$.[*].coefficient").value(hasItem(DEFAULT_COEFFICIENT.intValue())))
-            .andExpect(jsonPath("$.[*].employedManager").value(hasItem(DEFAULT_EMPLOYED_MANAGER)))
             .andExpect(jsonPath("$.[*].numberHours").value(hasItem(DEFAULT_NUMBER_HOURS)))
             .andExpect(jsonPath("$.[*].averageHourlyCost").value(hasItem(DEFAULT_AVERAGE_HOURLY_COST)))
             .andExpect(jsonPath("$.[*].monthlyGrossAmount").value(hasItem(DEFAULT_MONTHLY_GROSS_AMOUNT.intValue())))
@@ -442,11 +428,10 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER))
             .andExpect(jsonPath("$.identityCard").value(DEFAULT_IDENTITY_CARD))
-            .andExpect(jsonPath("$.dateInspiration").value(DEFAULT_DATE_INSPIRATION))
+            .andExpect(jsonPath("$.dateInspiration").value(DEFAULT_DATE_INSPIRATION.toString()))
             .andExpect(jsonPath("$.nationality").value(DEFAULT_NATIONALITY.toString()))
             .andExpect(jsonPath("$.uploadIdentityCardContentType").value(DEFAULT_UPLOAD_IDENTITY_CARD_CONTENT_TYPE))
             .andExpect(jsonPath("$.uploadIdentityCard").value(Base64.getEncoder().encodeToString(DEFAULT_UPLOAD_IDENTITY_CARD)))
-            .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME))
             .andExpect(jsonPath("$.typeEmployed").value(DEFAULT_TYPE_EMPLOYED.toString()))
             .andExpect(jsonPath("$.cityAgency").value(DEFAULT_CITY_AGENCY))
             .andExpect(jsonPath("$.residenceCity").value(DEFAULT_RESIDENCE_CITY))
@@ -460,7 +445,6 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.descriptionWorkstation").value(DEFAULT_DESCRIPTION_WORKSTATION))
             .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL.toString()))
             .andExpect(jsonPath("$.coefficient").value(DEFAULT_COEFFICIENT.intValue()))
-            .andExpect(jsonPath("$.employedManager").value(DEFAULT_EMPLOYED_MANAGER))
             .andExpect(jsonPath("$.numberHours").value(DEFAULT_NUMBER_HOURS))
             .andExpect(jsonPath("$.averageHourlyCost").value(DEFAULT_AVERAGE_HOURLY_COST))
             .andExpect(jsonPath("$.monthlyGrossAmount").value(DEFAULT_MONTHLY_GROSS_AMOUNT.intValue()))
@@ -499,7 +483,6 @@ class EmployeeResourceIT {
             .nationality(UPDATED_NATIONALITY)
             .uploadIdentityCard(UPDATED_UPLOAD_IDENTITY_CARD)
             .uploadIdentityCardContentType(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE)
-            .companyName(UPDATED_COMPANY_NAME)
             .typeEmployed(UPDATED_TYPE_EMPLOYED)
             .cityAgency(UPDATED_CITY_AGENCY)
             .residenceCity(UPDATED_RESIDENCE_CITY)
@@ -513,7 +496,6 @@ class EmployeeResourceIT {
             .descriptionWorkstation(UPDATED_DESCRIPTION_WORKSTATION)
             .level(UPDATED_LEVEL)
             .coefficient(UPDATED_COEFFICIENT)
-            .employedManager(UPDATED_EMPLOYED_MANAGER)
             .numberHours(UPDATED_NUMBER_HOURS)
             .averageHourlyCost(UPDATED_AVERAGE_HOURLY_COST)
             .monthlyGrossAmount(UPDATED_MONTHLY_GROSS_AMOUNT)
@@ -543,7 +525,6 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getNationality()).isEqualTo(UPDATED_NATIONALITY);
         assertThat(testEmployee.getUploadIdentityCard()).isEqualTo(UPDATED_UPLOAD_IDENTITY_CARD);
         assertThat(testEmployee.getUploadIdentityCardContentType()).isEqualTo(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE);
-        assertThat(testEmployee.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testEmployee.getTypeEmployed()).isEqualTo(UPDATED_TYPE_EMPLOYED);
         assertThat(testEmployee.getCityAgency()).isEqualTo(UPDATED_CITY_AGENCY);
         assertThat(testEmployee.getResidenceCity()).isEqualTo(UPDATED_RESIDENCE_CITY);
@@ -557,7 +538,6 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getDescriptionWorkstation()).isEqualTo(UPDATED_DESCRIPTION_WORKSTATION);
         assertThat(testEmployee.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testEmployee.getCoefficient()).isEqualTo(UPDATED_COEFFICIENT);
-        assertThat(testEmployee.getEmployedManager()).isEqualTo(UPDATED_EMPLOYED_MANAGER);
         assertThat(testEmployee.getNumberHours()).isEqualTo(UPDATED_NUMBER_HOURS);
         assertThat(testEmployee.getAverageHourlyCost()).isEqualTo(UPDATED_AVERAGE_HOURLY_COST);
         assertThat(testEmployee.getMonthlyGrossAmount()).isEqualTo(UPDATED_MONTHLY_GROSS_AMOUNT);
@@ -641,17 +621,16 @@ class EmployeeResourceIT {
             .nationality(UPDATED_NATIONALITY)
             .uploadIdentityCard(UPDATED_UPLOAD_IDENTITY_CARD)
             .uploadIdentityCardContentType(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE)
-            .typeEmployed(UPDATED_TYPE_EMPLOYED)
-            .residenceCity(UPDATED_RESIDENCE_CITY)
+            .cityAgency(UPDATED_CITY_AGENCY)
             .address(UPDATED_ADDRESS)
-            .birthDate(UPDATED_BIRTH_DATE)
-            .entryDate(UPDATED_ENTRY_DATE)
+            .socialSecurityNumber(UPDATED_SOCIAL_SECURITY_NUMBER)
+            .birthPlace(UPDATED_BIRTH_PLACE)
             .releaseDate(UPDATED_RELEASE_DATE)
             .workstation(UPDATED_WORKSTATION)
-            .level(UPDATED_LEVEL)
+            .descriptionWorkstation(UPDATED_DESCRIPTION_WORKSTATION)
             .coefficient(UPDATED_COEFFICIENT)
-            .averageHourlyCost(UPDATED_AVERAGE_HOURLY_COST)
-            .contractType(UPDATED_CONTRACT_TYPE)
+            .numberHours(UPDATED_NUMBER_HOURS)
+            .commissionAmount(UPDATED_COMMISSION_AMOUNT)
             .hireDate(UPDATED_HIRE_DATE);
 
         restEmployeeMockMvc
@@ -675,26 +654,24 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getNationality()).isEqualTo(UPDATED_NATIONALITY);
         assertThat(testEmployee.getUploadIdentityCard()).isEqualTo(UPDATED_UPLOAD_IDENTITY_CARD);
         assertThat(testEmployee.getUploadIdentityCardContentType()).isEqualTo(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE);
-        assertThat(testEmployee.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
-        assertThat(testEmployee.getTypeEmployed()).isEqualTo(UPDATED_TYPE_EMPLOYED);
-        assertThat(testEmployee.getCityAgency()).isEqualTo(DEFAULT_CITY_AGENCY);
-        assertThat(testEmployee.getResidenceCity()).isEqualTo(UPDATED_RESIDENCE_CITY);
+        assertThat(testEmployee.getTypeEmployed()).isEqualTo(DEFAULT_TYPE_EMPLOYED);
+        assertThat(testEmployee.getCityAgency()).isEqualTo(UPDATED_CITY_AGENCY);
+        assertThat(testEmployee.getResidenceCity()).isEqualTo(DEFAULT_RESIDENCE_CITY);
         assertThat(testEmployee.getAddress()).isEqualTo(UPDATED_ADDRESS);
-        assertThat(testEmployee.getSocialSecurityNumber()).isEqualTo(DEFAULT_SOCIAL_SECURITY_NUMBER);
-        assertThat(testEmployee.getBirthDate()).isEqualTo(UPDATED_BIRTH_DATE);
-        assertThat(testEmployee.getBirthPlace()).isEqualTo(DEFAULT_BIRTH_PLACE);
-        assertThat(testEmployee.getEntryDate()).isEqualTo(UPDATED_ENTRY_DATE);
+        assertThat(testEmployee.getSocialSecurityNumber()).isEqualTo(UPDATED_SOCIAL_SECURITY_NUMBER);
+        assertThat(testEmployee.getBirthDate()).isEqualTo(DEFAULT_BIRTH_DATE);
+        assertThat(testEmployee.getBirthPlace()).isEqualTo(UPDATED_BIRTH_PLACE);
+        assertThat(testEmployee.getEntryDate()).isEqualTo(DEFAULT_ENTRY_DATE);
         assertThat(testEmployee.getReleaseDate()).isEqualTo(UPDATED_RELEASE_DATE);
         assertThat(testEmployee.getWorkstation()).isEqualTo(UPDATED_WORKSTATION);
-        assertThat(testEmployee.getDescriptionWorkstation()).isEqualTo(DEFAULT_DESCRIPTION_WORKSTATION);
-        assertThat(testEmployee.getLevel()).isEqualTo(UPDATED_LEVEL);
+        assertThat(testEmployee.getDescriptionWorkstation()).isEqualTo(UPDATED_DESCRIPTION_WORKSTATION);
+        assertThat(testEmployee.getLevel()).isEqualTo(DEFAULT_LEVEL);
         assertThat(testEmployee.getCoefficient()).isEqualTo(UPDATED_COEFFICIENT);
-        assertThat(testEmployee.getEmployedManager()).isEqualTo(DEFAULT_EMPLOYED_MANAGER);
-        assertThat(testEmployee.getNumberHours()).isEqualTo(DEFAULT_NUMBER_HOURS);
-        assertThat(testEmployee.getAverageHourlyCost()).isEqualTo(UPDATED_AVERAGE_HOURLY_COST);
+        assertThat(testEmployee.getNumberHours()).isEqualTo(UPDATED_NUMBER_HOURS);
+        assertThat(testEmployee.getAverageHourlyCost()).isEqualTo(DEFAULT_AVERAGE_HOURLY_COST);
         assertThat(testEmployee.getMonthlyGrossAmount()).isEqualTo(DEFAULT_MONTHLY_GROSS_AMOUNT);
-        assertThat(testEmployee.getCommissionAmount()).isEqualTo(DEFAULT_COMMISSION_AMOUNT);
-        assertThat(testEmployee.getContractType()).isEqualTo(UPDATED_CONTRACT_TYPE);
+        assertThat(testEmployee.getCommissionAmount()).isEqualTo(UPDATED_COMMISSION_AMOUNT);
+        assertThat(testEmployee.getContractType()).isEqualTo(DEFAULT_CONTRACT_TYPE);
         assertThat(testEmployee.getSalaryType()).isEqualTo(DEFAULT_SALARY_TYPE);
         assertThat(testEmployee.getHireDate()).isEqualTo(UPDATED_HIRE_DATE);
     }
@@ -721,7 +698,6 @@ class EmployeeResourceIT {
             .nationality(UPDATED_NATIONALITY)
             .uploadIdentityCard(UPDATED_UPLOAD_IDENTITY_CARD)
             .uploadIdentityCardContentType(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE)
-            .companyName(UPDATED_COMPANY_NAME)
             .typeEmployed(UPDATED_TYPE_EMPLOYED)
             .cityAgency(UPDATED_CITY_AGENCY)
             .residenceCity(UPDATED_RESIDENCE_CITY)
@@ -735,7 +711,6 @@ class EmployeeResourceIT {
             .descriptionWorkstation(UPDATED_DESCRIPTION_WORKSTATION)
             .level(UPDATED_LEVEL)
             .coefficient(UPDATED_COEFFICIENT)
-            .employedManager(UPDATED_EMPLOYED_MANAGER)
             .numberHours(UPDATED_NUMBER_HOURS)
             .averageHourlyCost(UPDATED_AVERAGE_HOURLY_COST)
             .monthlyGrossAmount(UPDATED_MONTHLY_GROSS_AMOUNT)
@@ -765,7 +740,6 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getNationality()).isEqualTo(UPDATED_NATIONALITY);
         assertThat(testEmployee.getUploadIdentityCard()).isEqualTo(UPDATED_UPLOAD_IDENTITY_CARD);
         assertThat(testEmployee.getUploadIdentityCardContentType()).isEqualTo(UPDATED_UPLOAD_IDENTITY_CARD_CONTENT_TYPE);
-        assertThat(testEmployee.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testEmployee.getTypeEmployed()).isEqualTo(UPDATED_TYPE_EMPLOYED);
         assertThat(testEmployee.getCityAgency()).isEqualTo(UPDATED_CITY_AGENCY);
         assertThat(testEmployee.getResidenceCity()).isEqualTo(UPDATED_RESIDENCE_CITY);
@@ -779,7 +753,6 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getDescriptionWorkstation()).isEqualTo(UPDATED_DESCRIPTION_WORKSTATION);
         assertThat(testEmployee.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testEmployee.getCoefficient()).isEqualTo(UPDATED_COEFFICIENT);
-        assertThat(testEmployee.getEmployedManager()).isEqualTo(UPDATED_EMPLOYED_MANAGER);
         assertThat(testEmployee.getNumberHours()).isEqualTo(UPDATED_NUMBER_HOURS);
         assertThat(testEmployee.getAverageHourlyCost()).isEqualTo(UPDATED_AVERAGE_HOURLY_COST);
         assertThat(testEmployee.getMonthlyGrossAmount()).isEqualTo(UPDATED_MONTHLY_GROSS_AMOUNT);

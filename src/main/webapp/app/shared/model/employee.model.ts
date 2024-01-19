@@ -16,11 +16,10 @@ export interface IEmployee {
   email?: string;
   phoneNumber?: string;
   identityCard?: string;
-  dateInspiration?: string | null;
+  dateInspiration?: dayjs.Dayjs | null;
   nationality?: keyof typeof Pays | null;
   uploadIdentityCardContentType?: string | null;
   uploadIdentityCard?: string | null;
-  companyName?: string | null;
   typeEmployed?: keyof typeof TypeEmployed | null;
   cityAgency?: string | null;
   residenceCity?: string | null;
@@ -34,7 +33,6 @@ export interface IEmployee {
   descriptionWorkstation?: string | null;
   level?: keyof typeof Level | null;
   coefficient?: number | null;
-  employedManager?: string | null;
   numberHours?: string | null;
   averageHourlyCost?: string | null;
   monthlyGrossAmount?: number | null;
@@ -46,6 +44,7 @@ export interface IEmployee {
   jobs?: IJob[] | null;
   manager?: IEmployee | null;
   department?: IDepartment | null;
+  employes?: IEmployee[] | null;
   jobHistory?: IJobHistory | null;
 }
 
